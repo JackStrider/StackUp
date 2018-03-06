@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerCharecter : MonoBehaviour {
+public class PlayerCharacter : MonoBehaviour {
 
     #region serialzed fields
     [SerializeField]
