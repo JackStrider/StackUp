@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23058351891668562}
   - component: {fileID: 33068875551791046}
   - component: {fileID: 114682831180613560}
-  - component: {fileID: 64872258301541986}
+  - component: {fileID: 65374131396586102}
   - component: {fileID: 54756586425735786}
   m_Layer: 0
   m_Name: StackBlock
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1147918850735710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22, y: 10, z: 22}
+  m_LocalPosition: {x: -9.321577, y: 6.7293572, z: 27.504963}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,8 +101,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &64872258301541986
-MeshCollider:
+--- !u!65 &65374131396586102
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -110,11 +110,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0.5, y: 0.5, z: -0.5}
 --- !u!114 &114435485067573980
 MonoBehaviour:
   m_ObjectHideFlags: 1

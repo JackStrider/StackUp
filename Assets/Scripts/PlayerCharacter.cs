@@ -46,10 +46,12 @@ public class PlayerCharacter : MonoBehaviour {
     {
         get { return Input.GetAxis(VerticalInputName); }
     }
+
     private float FireInput
     {
         get { return Input.GetAxis(FireInputName); }
     }
+
     private float JumpInput
     {
         get { return Input.GetAxis(JumpInputName); }
@@ -95,7 +97,7 @@ public class PlayerCharacter : MonoBehaviour {
 
     private void UpdatePlayerIndexLabel()
     {
-        playerNumberLabel.text = ControllingPlayer.PlayerNumber.ToString();
+        playerNumberLabel.text = ("Player:" + ControllingPlayer.PlayerNumber.ToString());
     }
 
     void Awake()
@@ -118,7 +120,7 @@ public class PlayerCharacter : MonoBehaviour {
 
     private void Move()
     {
-        var moveDirection = new Vector2(HorizontalInput, VerticalInput);
+        var moveDirection = new Vector3(VerticalInput, JumpInput, HorizontalInput);
         rigidbody.velocity = moveDirection * moveSpeed;
     }
 }
