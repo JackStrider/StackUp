@@ -39,12 +39,28 @@ public class PlayerCharacter : MonoBehaviour {
     #region private propeties
     private float HorizontalInput
     {
-        get { return Input.GetAxis(HorizontalInputName); }
+        get
+        {
+            float input = Input.GetAxis(HorizontalInputName);
+            if (Mathf.Abs(input) < 0.42f)
+            {
+                input = 0;
+            }
+            return input;
+        }
     }
 
     private float VerticalInput
     {
-        get { return Input.GetAxis(VerticalInputName); }
+        get
+        {
+            float input = Input.GetAxis(VerticalInputName);
+            if (Mathf.Abs(input) < 0.42f)
+            {
+                input = 0;
+            }
+            return input;
+        }
     }
 
     private float FireInput
@@ -55,6 +71,16 @@ public class PlayerCharacter : MonoBehaviour {
     private float JumpInput
     {
         get { return Input.GetAxis(JumpInputName); }
+    }
+
+    private float AimVertical
+    {
+        get { return Input.GetAxis(AimVerticalInputName); }
+    }
+
+    private float AimHorizontal
+    {
+        get { return Input.GetAxis(AimHorizontalInputName); }
     }
 
     // You must configure the Unity Input Manager
@@ -70,11 +96,27 @@ public class PlayerCharacter : MonoBehaviour {
         }
     }
 
+    private string AimHorizontalInputName
+    {
+        get
+        {
+            return "AimHorizontal" + ControllingPlayer.PlayerNumber;
+        }
+    }
+
     private string VerticalInputName
     {
         get
         {
             return "Vertical" + ControllingPlayer.PlayerNumber;
+        }
+    }
+
+    private string AimVerticalInputName
+    {
+        get
+        {
+            return "AimVertical" + ControllingPlayer.PlayerNumber;
         }
     }
 
@@ -116,11 +158,31 @@ public class PlayerCharacter : MonoBehaviour {
     private void FixedUpdate()
     {
         Move();
+        //Aim();
     }
 
     private void Move()
     {
-        var moveDirection = new Vector3(VerticalInput, JumpInput, HorizontalInput);
-        rigidbody.velocity = moveDirection * moveSpeed;
+
+        var moveDirection = new Vector3(VerticalInput * moveSpeed, rigidbody.velocity.y, HorizontalInput * moveSpeed);
+        rigidbody.velocity = moveDirection;
+        if (VerticalInput != 0 || HorizontalInput != 0)
+        {
+            transform.rotation = Quaternion.LookRotation(moveDirection);
+        }
+        Vector3 rotation = new Vector3(0, transform.eulerAngles.y, 0);
+        transform.rotation = Quaternion.Euler(rotation);
+
+        Debug.Log("Vertical input: " + VerticalInput);
+        Debug.Log("Horizontal input: " + HorizontalInput);
+    }
+
+    private void Aim()
+    {
+        if (AimHorizontal != 0 || AimVertical != 0)
+        {
+            float angle = Mathf.Atan2(AimHorizontal, AimVertical) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
+        }
     }
 }
