@@ -12,12 +12,16 @@ public class PlayerCharacter : MonoBehaviour {
 
     [SerializeField]
     private int debugPlayerNumberOverride = 0;
+
+    [SerializeField]
+    public float jumpForce = 2.0f;
     #endregion
 
     #region private felds
     private Rigidbody rigidbody;
     private Text playerNumberLabel;
     private Player controllingPlayer_UseProperty;
+    private string blocksHoldingVisual;
     #endregion
 
     #region public properties 
@@ -25,13 +29,17 @@ public class PlayerCharacter : MonoBehaviour {
     //We will use the Player.PlayerNumber. to
     //decide which GamePad to look at.
 
-        public Player ControllingPlayer
+    public Vector3 jump;
+
+    public bool isGrounded;
+
+    public Player ControllingPlayer
     {
         get { return controllingPlayer_UseProperty; }
         set
         {
             controllingPlayer_UseProperty = value;
-            UpdatePlayerIndexLabel();
+            //UpdatePlayerIndexLabel();
         }
     }
     #endregion
@@ -137,10 +145,10 @@ public class PlayerCharacter : MonoBehaviour {
     }
     #endregion
 
-    private void UpdatePlayerIndexLabel()
-    {
-        playerNumberLabel.text = ("Player:" + ControllingPlayer.PlayerNumber.ToString());
-    }
+    //private void UpdatePlayerIndexLabel()
+    //{
+    //    playerNumberLabel.text = (blocksHoldingVisual);
+    //}
 
     void Awake()
     {
@@ -155,10 +163,35 @@ public class PlayerCharacter : MonoBehaviour {
 #endif
     }
 
+    void Start()
+    {
+        rigidbody = GetComponent<Rigidbody>();
+        jump = new Vector3(0.0f, 2.0f, 0.0f);
+    }
+
     private void FixedUpdate()
     {
         Move();
-        //Aim();
+
+        if (Input.GetButtonDown(JumpInputName) && isGrounded == true)
+        {
+            rigidbody.AddForce(jump * jumpForce, ForceMode.Impulse);
+            isGrounded = false;
+        }
+    }
+
+    private void OnButtonDown(Collider other)
+    {
+        Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            Debug.DrawRay(transform.position - new Vector3(-1,2,0), fwd, Color.green);
+
+        RaycastHit ray = new RaycastHit();
+
+        if (Physics.Raycast(transform.position - new Vector3(-1, 2, 0), fwd, 1))
+        {
+            if (other.gameObject.tag == "StackBlock")
+            print("There is something in front of the object!");
+        }
     }
 
     private void Move()
@@ -177,12 +210,8 @@ public class PlayerCharacter : MonoBehaviour {
         Debug.Log("Horizontal input: " + HorizontalInput);
     }
 
-    private void Aim()
+    private void OnCollisionStay(Collision collision)
     {
-        if (AimHorizontal != 0 || AimVertical != 0)
-        {
-            float angle = Mathf.Atan2(AimHorizontal, AimVertical) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, angle, 0));
-        }
+        isGrounded = true;
     }
 }

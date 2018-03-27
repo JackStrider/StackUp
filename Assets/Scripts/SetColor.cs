@@ -4,16 +4,15 @@ using UnityEngine;
 
 public class SetColor : MonoBehaviour {
 
-    // Use this for initialization
-    void Start()
+    private Player controllingPlayer;
+
+    private void Start()
     {
-        //switch()
+        controllingPlayer = GetComponentInParent<PlayerCharacter>().ControllingPlayer;
+
+        //switch (controllingPlayer.ToString)
         //{
-        //    case (ControllingPlayer.PlayerNumber = 1):
-        //Renderer rend = GetComponent<Renderer>();
-        //rend.material.shader = Shader.Find("Specular");
-        //rend.material.SetColor("_SpecColor", Color.red);
-        //        break;
+
         //}
-    }	
+    }
 }
