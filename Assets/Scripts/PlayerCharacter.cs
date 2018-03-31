@@ -185,7 +185,7 @@ public class PlayerCharacter : MonoBehaviour {
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
             Debug.DrawRay(transform.position - new Vector3(-1,2,0), fwd, Color.green);
 
-        RaycastHit ray = new RaycastHit();
+        //RaycastHit ray = new RaycastHit();
 
         if (Physics.Raycast(transform.position - new Vector3(-1, 2, 0), fwd, 1))
         {
@@ -206,8 +206,8 @@ public class PlayerCharacter : MonoBehaviour {
         Vector3 rotation = new Vector3(0, transform.eulerAngles.y, 0);
         transform.rotation = Quaternion.Euler(rotation);
 
-        Debug.Log("Vertical input: " + VerticalInput);
-        Debug.Log("Horizontal input: " + HorizontalInput);
+        //Debug.Log("Vertical input: " + VerticalInput);
+        //Debug.Log("Horizontal input: " + HorizontalInput);
     }
 
     private void OnCollisionStay(Collision collision)
