@@ -9,8 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu 3D.unity
     guid: fa0913115ac1d4fba8b9d10280f4b04d
   - enabled: 1
-    path: Assets/Scenes/PlayerJoin.unity
-    guid: 0df0b4e8e2cc1a3418c704701ef9e7dc
-  - enabled: 1
     path: Assets/Scenes/MainGame.unity
     guid: c755d812b0c59344788f13dd2b58fcb8
