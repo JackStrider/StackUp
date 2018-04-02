@@ -36,16 +36,12 @@ public class PickUpBoxes : MonoBehaviour
             print("There is something in front of the object!");
     }
     
-    private void Update()
-    {
-        
-    }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "StackBlock")
+        if (Input.GetButtonDown(FireInputName))
         {
-            if (Input.GetButtonDown(FireInputName))
+            if (other.gameObject.tag == "StackBlock")
             {
                 if (blocksHeld <= 2)
                 {

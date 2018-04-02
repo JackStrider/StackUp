@@ -19,21 +19,40 @@ public class BoxSpawner : MonoBehaviour {
 
         Rigidbody RidgidPrefab;
 
-        if (controllingPlayer.PlayerNumber == 1)
+        switch (controllingPlayer.PlayerNumber)
         {
-        RidgidPrefab = Instantiate(PrefabBlue, spawnPoint.position, spawnPoint.rotation);
+            case 1:
+                RidgidPrefab = Instantiate(PrefabBlue, spawnPoint.position, spawnPoint.rotation);
+                break;
+
+            case 2:
+                RidgidPrefab = Instantiate(PrefabRed, spawnPoint.position, spawnPoint.rotation);
+                break;
+
+            case 3:
+                RidgidPrefab = Instantiate(PrefabGreen, spawnPoint.position, spawnPoint.rotation);
+                break;
+
+            case 4:
+                RidgidPrefab = Instantiate(PrefabPurple, spawnPoint.position, spawnPoint.rotation);
+                break;
         }
-        if (controllingPlayer.PlayerNumber == 2)
-        {
-            RidgidPrefab = Instantiate(PrefabRed, spawnPoint.position, spawnPoint.rotation);
-        }
-        if (controllingPlayer.PlayerNumber == 3)
-        {
-            RidgidPrefab = Instantiate(PrefabGreen, spawnPoint.position, spawnPoint.rotation);
-        }
-        if (controllingPlayer.PlayerNumber == 4)
-        {
-            RidgidPrefab = Instantiate(PrefabPurple, spawnPoint.position, spawnPoint.rotation);
-        }
+
+        //if (controllingPlayer.PlayerNumber == 1)
+        //{
+        //    RidgidPrefab = Instantiate(PrefabBlue, spawnPoint.position, spawnPoint.rotation);
+        //}
+        //if (controllingPlayer.PlayerNumber == 2)
+        //{
+        //    RidgidPrefab = Instantiate(PrefabRed, spawnPoint.position, spawnPoint.rotation);
+        //}
+        //if (controllingPlayer.PlayerNumber == 3)
+        //{
+        //    RidgidPrefab = Instantiate(PrefabGreen, spawnPoint.position, spawnPoint.rotation);
+        //}
+        //if (controllingPlayer.PlayerNumber == 4)
+        //{
+        //    RidgidPrefab = Instantiate(PrefabPurple, spawnPoint.position, spawnPoint.rotation);
+        //}
     }
 }
